@@ -30,7 +30,7 @@ public class LoginController {
         try {
             request.login(userDTO.getUsername(), userDTO.getPassword());
         } catch (ServletException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Login failed");
+            return ResponseEntity.status(401).body("Login failed");
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(userDTO.getUsername());

@@ -25,10 +25,10 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/", "/api/login", "/api/join").permitAll()
+                        .requestMatchers("/", "/api/login", "/api/join", "/kafka/*").permitAll()
                         .requestMatchers("/admin").hasRole("ADMIN")
                         .requestMatchers("/my/**").hasAnyRole("ADMIN", "USER")
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 );
         http
                 .sessionManagement((auth) -> auth

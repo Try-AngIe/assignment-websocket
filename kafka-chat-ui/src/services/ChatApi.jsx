@@ -1,21 +1,23 @@
 import axios from "axios";
 
-const api = axios.create({
-    baseURL: "http://localhost:9090/kafka",
+const kafkaApi = axios.create({
+    baseURL: "http://localhost:9100/kafka",
 });
 
 const ChatApi = {
+
+    //메시지 수신
     getMessages: (groupId) => {
-        console.log("[API 호출해서 메시지 가져옴]");
-        return api.get(`/messages/${groupId}`);
+        return kafkaApi.get(`/messages/${groupId}`);
     },
 
+    //메시지 송신
     sendMessage: (username, text) => {
         let msg = {
             author: username,
             content: text,
         };
-        return api.post(`/publish`, msg, {
+        return kafkaApi.post(`/publish`, msg, {
             headers: { "Content-Type": "application/json" },
         });
     },

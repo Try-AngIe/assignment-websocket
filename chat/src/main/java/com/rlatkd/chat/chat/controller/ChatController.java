@@ -9,6 +9,8 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Slf4j
 @RestController
@@ -19,8 +21,8 @@ public class ChatController {
     private final KafkaProducerService producerService;
 
     @PostMapping("/publish")
-    public void enter(@Payload ChatMessageDto chatMessageDto) {
-        producerService.enter(chatMessageDto.author());
+    public void enter(@RequestBody ChatMessageDto chatMessageDto) {
+        producerService.sendChatMessage(chatMessageDto);
     }
 
     @MessageMapping("/message")

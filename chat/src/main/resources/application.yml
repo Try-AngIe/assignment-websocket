@@ -1,13 +1,21 @@
 server:
-  port: 9090
+  port: 9100
 
 spring:
   application:
     name: stomp-kafka-test
 
+  kafka:
+    producer:
+      bootstrap-servers: kafka:9092
+    consumer:
+      group-id: test
+      bootstrap-servers: kafka:9092
+      auto-offset-reset: earliest
+
   datasource:
     driver-class-name: org.h2.Driver
-    url: 'jdbc:h2:mem:test'
+    url: jdbc:h2:~/test
     username: root
     password: 1234
 
@@ -16,6 +24,8 @@ spring:
     console: # H2 DB를 웹에서 관리할 수 있는 기능
       enabled: true           # H2 Console 사용 여부
       path: /h2-console       # H2 Console 접속 주소
+      settings:
+        web-allow-others: true
 
   # JPA 설정
   jpa:

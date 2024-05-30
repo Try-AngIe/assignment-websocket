@@ -3,12 +3,14 @@ package com.rlatkd.chat.chat.dto;
 import com.rlatkd.chat.chat.entity.ChatMessage;
 import com.rlatkd.chat.chat.entity.ChatMessageType;
 
+import java.io.Serializable;
+
 public record ChatMessageDto(
         ChatMessageType type,
         String author,
         String content,
         String timestamp
-) {
+) implements Serializable {
     public static ChatMessage toModel(ChatMessageDto messageDto) {
         return ChatMessage.builder()
                 .type(messageDto.type)

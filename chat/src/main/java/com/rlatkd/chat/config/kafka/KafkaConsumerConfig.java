@@ -25,15 +25,15 @@ import java.util.Map;
 public class KafkaConsumerConfig {
 
     @Bean
-    ConcurrentKafkaListenerContainerFactory<String, ChatMessageDto> chatKafkaListenerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, ChatMessageDto> factory = new ConcurrentKafkaListenerContainerFactory<>();
+    ConcurrentKafkaListenerContainerFactory<String, String> chatKafkaListenerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(chatConsumerFactory());
         return factory;
     }
 
     @Bean
-    public ConsumerFactory<String, ChatMessageDto> chatConsumerFactory() {
-        return new DefaultKafkaConsumerFactory<>(consumerConfigurations(), new StringDeserializer(), new JsonDeserializer<>(ChatMessageDto.class, false));
+    public ConsumerFactory<String, String> chatConsumerFactory() {
+        return new DefaultKafkaConsumerFactory<>(consumerConfigurations(), new StringDeserializer(), new StringDeserializer());
     }
 
     @Bean
@@ -42,7 +42,8 @@ public class KafkaConsumerConfig {
         configurations.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "kafka:9092");
         configurations.put(ConsumerConfig.GROUP_ID_CONFIG, "test");
         configurations.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        configurations.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+        configurations.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+
         return configurations;
     }
 }

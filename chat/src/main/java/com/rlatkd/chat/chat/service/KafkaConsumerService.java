@@ -1,5 +1,8 @@
 package com.rlatkd.chat.chat.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.rlatkd.chat.chat.dto.ChatMessageDto;
 import com.rlatkd.chat.chat.entity.ChatMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +17,7 @@ import org.springframework.stereotype.Service;
 public class KafkaConsumerService {
 
     private final SimpMessagingTemplate template;
+    private final ObjectMapper mapper;
 
     /**
      * - KafkaListener 어노테이션을 통해 Kafka로부터 메시지를 받을 수 있음
@@ -22,10 +26,15 @@ public class KafkaConsumerService {
      */
     @KafkaListener(
             topics = "${topic.name}",
-            containerFactory = "chatKafkaListenerFactory"
+            groupId = "test"
     )
-    public void listen(ChatMessage chatMessage) {
+    public void listen(String chatMessage) {
         log.info("[KAFKA] listened: " + chatMessage);
-        template.convertAndSend("/topic/group" + chatMessage);
+        try {
+            ChatMessageDto chatMessageDto = mapper.readValue(chatMessage, ChatMessageDto.class);
+            template.convertAndSend("/topic/group", chatMessageDto);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
     }
 }

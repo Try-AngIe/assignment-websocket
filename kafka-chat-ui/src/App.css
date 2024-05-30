@@ -1,6 +1,27 @@
+html,
+body,
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Pretendard-Regular";
+    box-sizing: border-box;
+}
+
+.header {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #9bbbd4;
+}
+
+.content {
+    height: 90%;
+    width: 100%;
+    background-color: #9bbbd4;
 }

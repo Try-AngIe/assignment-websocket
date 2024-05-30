@@ -22,6 +22,7 @@ services:
         build: 
             context: "./kafka-chat-ui"
             dockerfile: Dockerfile 
+        restart: on-failure
         ports: 
             - "3000:3000"
     app:
@@ -32,6 +33,6 @@ services:
         depends_on:
             - kafka
         ports:
-            - "9090:9090"
+            - "9100:9100"
         environment:
             - TZ=Asia/Seoul
