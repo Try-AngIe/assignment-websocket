@@ -22,6 +22,7 @@ services:
         build: 
             context: "./kafka-chat-ui"
             dockerfile: Dockerfile 
+        restart: on-failure
         ports: 
             - "3000:3000"
     app:
@@ -30,24 +31,8 @@ services:
             dockerfile: Dockerfile
         restart: on-failure
         depends_on:
-            - mysql
             - kafka
         ports:
-            - "9090:9090"
+            - "9100:9100"
         environment:
             - TZ=Asia/Seoul
-
-    mysql:
-        image: mysql:8.0
-        container_name: mysql
-        restart: always
-        ports:
-        - 3307:3306 # 포트 변경
-        environment:
-            MYSQL_DATABASE: test
-            MYSQL_ROOT_PASSWORD: 1004
-            TZ: Asia/Seoul
-        volumes:
-        - ./db/mysql/data:/var/lib/mysql
-        - ./db/mysql/init:/docker-entrypoint-initdb.d
-        platform: linux/x86_64
