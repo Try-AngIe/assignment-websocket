@@ -20,14 +20,14 @@ services:
             - /var/run/docker.sock:/var/run/docker.sock
     client:
         build: 
-            context: "./kafka-chat-ui"
+            context: "./client"
             dockerfile: Dockerfile 
         restart: on-failure
         ports: 
             - "3000:3000"
-    app:
+    server:
         build:
-            context: "./chat"
+            context: "./server"
             dockerfile: Dockerfile
         restart: on-failure
         depends_on:
