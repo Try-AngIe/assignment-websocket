@@ -1,4 +1,4 @@
-package com.rlatkd.chat.config;
+package com.rlatkd.chat.config.websocket;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
@@ -18,7 +18,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/my-chat")
+        registry.addEndpoint("/api/chat")
                 .setAllowedOriginPatterns("*")
                 .withSockJS();
     }
@@ -28,4 +28,5 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         registry.setApplicationDestinationPrefixes("/kafka");
         registry.enableSimpleBroker("/topic/");
     }
+    
 }

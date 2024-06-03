@@ -17,14 +17,12 @@ public class LoginService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public UserDto authenticateUser(UserDto userDTO) {
-        UserEntity userEntity = userRepository.findByUsername(userDTO.getUsername()); // 사용자가 없으면 null 반환
-
-        if (userEntity == null || !bCryptPasswordEncoder.matches(userDTO.getPassword(), userEntity.getPassword())) {
+    public UserDto authenticateUser(UserDto userDto) {
+        UserEntity userEntity = userRepository.findByUsername(userDto.getUsername()); // 사용자가 없으면 null 반환
+        if (userEntity == null || !bCryptPasswordEncoder.matches(userDto.getPassword(), userEntity.getPassword())) {
             return null;
         }
-
-
-        return userDTO;
+        return userDto;
     }
+
 }

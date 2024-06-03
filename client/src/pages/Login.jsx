@@ -3,9 +3,10 @@
 import "../styles/Login.css"
 import logo from "../assets/logo.png"
 
+import { loginApi } from "../services/AuthApi";
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginApi } from "../services/AuthApi";
 
 const Login = () => {
 

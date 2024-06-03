@@ -1,9 +1,7 @@
 package com.rlatkd.chat.chat.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rlatkd.chat.chat.dto.ChatMessageDto;
-import com.rlatkd.chat.chat.entity.ChatMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -27,7 +25,7 @@ public class KafkaConsumerService {
 
     @KafkaListener(
             topics = "${topic.name}",
-            groupId = "test"
+            groupId = "test-group"
     )
     public void listen(String chatMessage) {
         log.info("[KAFKA] listened: " + chatMessage);
@@ -38,4 +36,5 @@ public class KafkaConsumerService {
             log.error(e.getMessage());
         }
     }
+    
 }

@@ -9,7 +9,7 @@ spring:
     producer:
       bootstrap-servers: kafka:9092
     consumer:
-      group-id: test
+      group-id: test-group
       bootstrap-servers: kafka:9092
       auto-offset-reset: earliest
 

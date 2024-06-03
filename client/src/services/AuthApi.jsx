@@ -22,15 +22,12 @@ export const joinApi = (userId, userPassword) => {
 
 } 
 
-
 export const loginApi = (userId, userPassword) => {
 
     let data = JSON.stringify({
         "username": userId,
         "password": userPassword
     });
-
-    console.log(data)
 
     let config = {
         method: 'post',

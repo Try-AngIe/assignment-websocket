@@ -8,7 +8,6 @@ import { joinApi } from "../services/AuthApi";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 const Join = () => {
 
     //유즈네비게이트

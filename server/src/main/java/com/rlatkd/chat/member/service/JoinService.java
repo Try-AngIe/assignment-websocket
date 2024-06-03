@@ -16,18 +16,18 @@ public class JoinService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public void joinProcess(UserDto userDTO) {
+    public void joinProcess(UserDto userDto) {
 
         //db에 이미 동일한 username을 가진 회원이 존재하는지?
-        boolean isUser = userRepository.existsByUsername(userDTO.getUsername());
+        boolean isUser = userRepository.existsByUsername(userDto.getUsername());
         if (isUser) {
             return;
         }
 
         UserEntity data = new UserEntity();
 
-        data.setUsername(userDTO.getUsername());
-        data.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
+        data.setUsername(userDto.getUsername());
+        data.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
         data.setRole("ROLE_ADMIN");
 
         userRepository.save(data);

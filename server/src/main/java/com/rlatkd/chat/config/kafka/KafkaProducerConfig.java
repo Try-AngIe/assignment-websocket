@@ -21,6 +21,7 @@ import java.util.Map;
  * - 문자열을 넘길땐 StringSerializer.class를, JSON 데이터를 넘길 땐 JsonSerializer.class를 적어주면 됨
  * - properties나 yaml으로 설정할 수도 있고, 아래처럼 @Bean으로 설정해줄 수도 있음
  **/
+
 @EnableKafka
 @Configuration
 public class KafkaProducerConfig {
@@ -43,4 +44,5 @@ public class KafkaProducerConfig {
     public KafkaTemplate<String, ChatMessageDto> kafkaChatTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
+    
 }

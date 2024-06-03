@@ -5,7 +5,7 @@ COPY       build.gradle settings.gradle ./
 # 의존성 다운로드 (빌드 과정 캐시)
 RUN        gradle build -x test --no-daemon || return 0
 
-COPY        . .
+COPY       . .
 
 RUN        gradle build -x test --no-daemon
 FROM       openjdk:17-jdk-slim

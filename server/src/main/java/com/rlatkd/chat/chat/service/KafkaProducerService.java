@@ -35,4 +35,5 @@ public class KafkaProducerService {
         log.info("[KAFKA] produce message: %s\n".formatted(message.toString()));
         kafkaChatTemplate.send(KAFKA_TOPIC, message);
     }
+    
 }
